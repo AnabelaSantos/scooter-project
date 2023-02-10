@@ -1,0 +1,41 @@
+classDiagram
+User "1"--o"1" ScooterApp
+User "1" -- "1"Scooter: rent
+Scooter "1" --o"1..*" ScooterApp
+
+class Scooter {
++string station
++null station
+-number user
+-number serial
+-static number nextSerial
++number charge
++boolean isBroken
++rent()
++dock(station)
++recharge()
++requestRepair()
++timer(recharge, requestRepair)
+}
+
+
+class User{
++string username
+#string password
+-number in years age
++boolean loggedIn
++login(passsword)
++logout()
+}
+
+class ScooterApp{
++object stations
+-object registeredUsers
+#registerUser(username, password, age)
+#loginUser(username, password)
+-logoutUser(username)
+-createScooter(station)
++dockScooter(scooter, station)
++rentScooter(scooter, user)
++print()
+}
