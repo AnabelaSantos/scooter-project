@@ -1,0 +1,73 @@
+sequenceDiagram
+alt Isn't a registered costumer
+User ->> ScooterApp: Download
+activate ScooterApp
+activate ScooterApp
+ScooterApp -->> User: Downloaded
+ScooterApp ->> User: Ask to register
+deactivate ScooterApp
+activate User
+alt User not a costumer and 18 or older
+User -->> ScooterApp: Registered
+deactivate User
+else User not a costumer and not 18
+ScooterApp -->> User: return "Too young to Register"
+end
+else Is a registered costumer
+activate ScooterApp
+ScooterApp ->> User: Ask to login
+deactivate ScooterApp
+activate User
+User -->> ScooterApp: Login
+deactivate User
+deactivate ScooterApp
+else is a registered costumer but tries to register
+User->> ScooterApp: fill in register form
+ScooterApp -->> User: return error "Already registered"
+end
+
+alt wants to use a Scooter
+alt Scooter is available
+par User to ScooterApp
+    User ->> ScooterApp: Request checkout
+and ScooterApp to Scooter
+    ScooterApp ->> Scooter: Locate and remove from Station
+and ScooterApp to User
+ ScooterApp -->> User: Rent it to user
+Scooter -->> ScooterApp: Give Location 
+User ->> Scooter: Check out
+end
+else Scooter is already rented
+par User to ScooterApp
+    User ->> ScooterApp: Request checkout
+and Scooter to ScooterApp    
+Scooter -->> ScooterApp: Give Location 
+and ScooterApp to User
+ScooterApp -->> User: Throw error "Scooter already rented"
+end
+end
+
+else Wants to return a Scooter
+par User to Scooter
+User ->> Scooter: Dock in
+and Scooter to ScooterApp
+Scooter ->> ScooterApp: Give Status and location
+and ScooterApp to User
+ScooterApp-->> User: rent finished
+and ScooterApp
+ScooterApp-> ScooterApp: Scooter is docked
+end
+end
+opt User doesn't want to use the service
+User ->> ScooterApp: Logout
+end
+
+
+
+
+
+
+
+
+
+
