@@ -31,10 +31,17 @@ class Scooter {
   }
 
   // Scooter method recharge
+  incrementCharge() {
+    this.charge += 10;
+    if (this.charge > 100) {
+      this.charge = 100;
+    }
+    console.log(this.incrementCharge);
+  }
   async charge() {
     console.log("Starting charge");
 
-    await new Promise((resolve) => setTimeout(resolve, 2000)); // wait 2 seconds
+    await new Promise((resolve) => setInterval(resolve, incrementCharge, 500));
     this.charge = 100;
 
     console.log("Charge complete");
