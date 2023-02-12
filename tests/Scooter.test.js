@@ -4,13 +4,6 @@ const User = require("../src/User");
 //typeof scooter === object
 describe("scooter object", () => {
   test("can create new scooter instance", () => {
-    let user1 = new User({
-      username: "Anabela",
-      password: "thisIsIt",
-      age: 75,
-      loggedIn: true,
-    });
-
     let scooter1 = new Scooter({
       station: "London Bridge",
     });
@@ -92,11 +85,13 @@ describe("scooter methods", () => {
     expect(scooter).toHaveProperty("station", "station8");
   });
   //charge method
+
   test("charge", async () => {
-    const scooter = new Scooter("station9");
+    let scooter = new Scooter("station9");
     await scooter.charge; // we need to wait for the charge!
     expect(scooter.charge).toBe(100);
   });
+
   //requestRepair method
   test("repair", async () => {
     const scooter = new Scooter("station9");
