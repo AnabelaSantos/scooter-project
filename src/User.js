@@ -10,10 +10,15 @@ class User {
 
   //the methods are assigned to properties in the object because they're in a constructor, not an object literal
 
-  login = (password) => {
-    this.loggedIn = true;
+  login = function (password) {
+    if (this.password === password) {
+      this.loggedIn = true;
+    } else {
+      this.logout();
+      throw new Error("incorrect password");
+    }
   };
-  logout = () => {
+  logout = function () {
     this.loggedIn = false;
   };
 }

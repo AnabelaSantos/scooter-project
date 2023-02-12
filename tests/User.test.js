@@ -14,7 +14,9 @@ describe("User class integrity checks", () => {
     expect(user1).toHaveProperty("password", "thisIsIt");
     expect(user1).toHaveProperty("age", "75"); // test age
   });
-  //test loogedIn status
+});
+//test loogedIn status
+describe("User class looged status", () => {
   test("Have LoggedIn status", () => {
     let user2 = new User({
       username: "Prince",
@@ -25,9 +27,28 @@ describe("User class integrity checks", () => {
     expect(typeof user2.loggedIn).toBe("boolean");
     expect(user2.loggedIn).toBe(false);
   });
-  test("");
+  // test login
+  test("If password is correct, logs the user in", () => {
+    let user3 = new User({
+      username: "Bob",
+      password: "theBuilder",
+      age: 79,
+    });
+    user3.login("theBuilder");
+    expect(user3.password).toBe("theBuilder");
+    expect(user3.loggedIn).toBe(true);
+  });
+
+  // test logout
+  test("If password is incorrect, throw error", () => {
+    let user4 = new User({
+      username: "Bob",
+      password: "theBuilder",
+      age: 79,
+    });
+    function incorrectPassword() {
+      logout("password");
+    }
+    expect(incorrectPassword).toThrow(Error);
+  });
 });
-
-// test login
-
-// test logout
