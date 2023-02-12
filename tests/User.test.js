@@ -47,7 +47,7 @@ describe("User class looged status", () => {
       age: 79,
     });
     function incorrectPassword() {
-      logout("password");
+      user4.login("wrongPassword");
     }
     expect(incorrectPassword).toThrow(Error);
   });
