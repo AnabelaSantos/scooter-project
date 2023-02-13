@@ -142,20 +142,35 @@ describe("loginUser method", () => {
     });
   });
 
-  //   // dock scooter method
-  //   describe("dock scooter method", () => {
-  //     test("new scooter is docked added to station's scooter list", () => {
-  //       let scooterApp = new ScooterApp();
-  //       let scooter = scooterApp.createScooter("station1");
-
-  //     });
-  //     test("No such Station Error", () => {
-  //       let scooterApp = new ScooterApp();
-
-  //       function noStation() {
-  //         let scooter = scooterApp.createScooter("Good Street");
-  //         expect(noStation).toThrow("no such station");
-  //       }
-  //     });
-  //   });
+  // dock scooter method
+  describe("dock scooter method", () => {
+    test("new scooter is docked added to station's scooter list", () => {
+      let scooterApp = new ScooterApp();
+      let scooter = scooterApp.createScooter("station1");
+      let user = new User({
+        username: "Bob",
+        password: "theBuilder",
+        age: 79,
+      });
+      scooterApp.rentScooter(scooter, user);
+      scooterApp.dockScooter(scooter, "station2");
+      expect(scooter.station).toBe("station2");
+    });
+    test("No such Station Error", () => {
+      let scooterApp = new ScooterApp();
+      let scooter = scooterApp.createScooter("station1");
+      function noStation() {
+        let scooter = scooterApp.dockScooter("Good Street");
+        expect(noStation).toThrow("no such station");
+      }
+    });
+    test("Scooter already at station Error", () => {
+      let scooterApp = new ScooterApp();
+      let scooter = scooterApp.createScooter("station1");
+      function inStation() {
+        let scooter = scooterApp.dockScooter("station1");
+        expect(inStation).toThrow("scooter already at station");
+      }
+    });
+  });
 });

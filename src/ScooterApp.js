@@ -83,7 +83,21 @@ class ScooterApp {
 
     console.log("scooter is rented");
   }
+
   // Dock Scooter method
+
+  dockScooter(scooter, station) {
+    if (scooter.station === station) {
+      throw new Error("scooter already at station");
+    }
+    if (!(station in this.stations)) {
+      throw new Error("no such station");
+    }
+    this.stations[station].push(scooter);
+    scooter.station = station;
+
+    console.log("scooter is docked");
+  }
 }
 
 module.exports = ScooterApp;
