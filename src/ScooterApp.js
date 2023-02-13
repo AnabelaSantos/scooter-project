@@ -96,7 +96,16 @@ class ScooterApp {
     this.stations[station].push(scooter);
     scooter.station = station;
 
-    console.log("scooter is docked");
+    console.log(`scooter #${scooter.serial} is docked`);
+  }
+
+  //print method
+  print() {
+    console.log(`List of registered users: ${registeredUsers}`);
+    console.log("This is a list of Stations:");
+    for (const station in this.stations) {
+      console.log(`${station}: ${this.stations[station].length}`);
+    }
   }
 }
 
